@@ -32,6 +32,7 @@ async def read_root(request: Request):
 @app.post("/AI")
 async def get_ai_response(request: Request):
     data = await request.json()
+    
     response = ollama.chat(model=self.AI_MODEL, messages=messages)
     ai_response = response['message']['content']
 
