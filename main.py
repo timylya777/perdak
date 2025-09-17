@@ -29,12 +29,18 @@ templates = Jinja2Templates(directory=os.path.join(FRONTEND_DIR, "templates"))
 @app.get("/")
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-@app.post("/AI")
+
+@app.post("/ai-question")
 async def get_ai_response(request: Request):
     data = await request.json()
-    
-    response = ollama.chat(model=self.AI_MODEL, messages=messages)
+    question = data.get("question")
+    response = ollama.chat(model="llama3", messages=str(question))
     ai_response = response['message']['content']
+
+    return {
+        "question" : str(question),
+        "answer" : ai_response
+    }
 
 
 if __name__ == "__main__":
