@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>НейроЧат</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
@@ -28,14 +28,16 @@
         </header>
 
         <main class="chat-container">
-            <div class="welcome-message">
+            <div class="welcome-message" id="welcome-message">
                 <div class="ai-avatar">
                     <i class="fas fa-robot"></i>
                 </div>
                 <h2>Привет! Я твой AI-ассистент</h2>
                 <p>Задай мне любой вопрос, и я постараюсь помочь тебе с ответом.</p>
                 <div class="suggestions">
-                    
+                    <button class="suggestion-btn" data-question="Расскажи о искусственном интеллекте">🤖 Об ИИ</button>
+                    <button class="suggestion-btn" data-question="Напиши код на Python">🐍 Код на Python</button>
+                    <button class="suggestion-btn" data-question="Объясни квантовую физику">⚛️ Квантовая физика</button>
                 </div>
             </div>
 
@@ -62,6 +64,7 @@
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Исправленный путь к скрипту -->
+    <script src="/static/script.js"></script>
 </body>
 </html>
