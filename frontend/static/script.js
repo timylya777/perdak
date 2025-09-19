@@ -243,3 +243,156 @@ if (window.matchMedia) {
         }
     });
 }
+// добавление модального окна настроек
+document.addEventListener('DOMContentLoaded', function() {
+            // Элементы модального окна
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsModal = document.getElementById('settings-modal');
+            const closeSettings = document.getElementById('close-settings');
+            const saveSettings = document.getElementById('save-settings');
+            const resetSettings = document.getElementById('reset-settings');
+            
+            // Элементы настроек
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const fontSizeSlider = document.getElementById('font-size');
+            const fontSizeValue = document.getElementById('font-size-value');
+            const notificationsCheckbox = document.getElementById('notifications');
+            const soundCheckbox = document.getElementById('sound-effects');
+            const historyCheckbox = document.getElementById('history-saving');
+            const typingCheckbox = document.getElementById('typing-indicator');
+            
+            // Открытие модального окна
+            settingsBtn.addEventListener('click', function() {
+                settingsModal.classList.add('active');
+                loadCurrentSettings();
+            });
+            
+            // Закрытие модального окна
+            closeSettings.addEventListener('click', closeModal);
+            settingsModal.addEventListener('click', function(e) {
+                if (e.target === settingsModal) closeModal();
+            });
+            
+            // Обработка выбора темы
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    themeButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Обновление значения размера шрифта
+            fontSizeSlider.addEventListener('input', function() {
+                fontSizeValue.textContent = `${this.value}px`;
+            });
+            
+            // Сохранение настроек
+            saveSettings.addEventListener('click', function() {
+                const selectedTheme = document.querySelector('.theme-btn.active').dataset.theme;
+                const fontSize = fontSizeSlider.value;
+                const notifications = notificationsCheckbox.checked;
+                const sound = soundCheckbox.checked;
+                const history = historyCheckbox.checked;
+                const typing = typingCheckbox.checked;
+                
+                // Сохранение в localStorage (в реальном приложении)
+                localStorage.setItem('chatTheme', selectedTheme);
+                localStorage.setItem('chatFontSize', fontSize);
+                localStorage.setItem('chatNotifications', notifications);
+                localStorage.setItem('chatSound', sound);
+                localStorage.setItem('chatHistory', history);
+                localStorage.setItem('chatTyping', typing);
+                
+                // Применение настроек
+                applySettings({
+                    theme: selectedTheme,
+                    fontSize: fontSize,
+                    notifications: notifications,
+                    sound: sound,
+                    history: history,
+                    typing: typing
+                });
+                
+                closeModal();
+            });
+            
+            // Сброс настроек
+            resetSettings.addEventListener('click', function() {
+                if (confirm('Вы уверены, что хотите сбросить все настройки к значениям по умолчанию?')) {
+                    // Установка значений по умолчанию
+                    themeButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-theme="light"]').classList.add('active');
+                    
+                    fontSizeSlider.value = 16;
+                    fontSizeValue.textContent = '16px';
+                    
+                    notificationsCheckbox.checked = true;
+                    soundCheckbox.checked = true;
+                    historyCheckbox.checked = true;
+                    typingCheckbox.checked = false;
+                    
+                }
+            });
+            
+            // Функция загрузки текущих настроек
+            function loadCurrentSettings() {
+                // Загрузка из localStorage (в реальном приложении)
+                const theme = localStorage.getItem('chatTheme') || 'light';
+                const fontSize = localStorage.getItem('chatFontSize') || 16;
+                const notifications = localStorage.getItem('chatNotifications') !== 'false';
+                const sound = localStorage.getItem('chatSound') !== 'false';
+                const history = localStorage.getItem('chatHistory') !== 'false';
+                const typing = localStorage.getItem('chatTyping') === 'true';
+                
+                // Установка значений в форму
+                themeButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
+                
+                fontSizeSlider.value = fontSize;
+                fontSizeValue.textContent = `${fontSize}px`;
+                
+                notificationsCheckbox.checked = notifications;
+                soundCheckbox.checked = sound;
+                historyCheckbox.checked = history;
+                typingCheckbox.checked = typing;
+            }
+            
+            // Функция применения настроек
+            function applySettings(settings) {
+                // Применение темы
+                if (settings.theme === 'dark' || (settings.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.body.classList.add('dark-theme');
+                } else {
+                    document.body.classList.remove('dark-theme');
+                }
+                
+                // Применение размера шрифта
+                document.body.style.fontSize = `${settings.fontSize}px`;
+                
+                // Здесь можно применить остальные настройки
+                console.log('Настройки применены:', settings);
+            }
+            
+            // Функция закрытия модального окна
+            function closeModal() {
+                settingsModal.classList.remove('active');
+            }
+            
+            // Функция показа уведомления
+            function showNotification(message) {
+                // В реальном приложении здесь можно использовать toast-уведомление
+                alert(message);
+            }
+            
+            // Инициализация настроек при загрузке страницы
+            const initialSettings = {
+                theme: localStorage.getItem('chatTheme') || 'light',
+                fontSize: localStorage.getItem('chatFontSize') || 16,
+                notifications: localStorage.getItem('chatNotifications') !== 'false',
+                sound: localStorage.getItem('chatSound') !== 'false',
+                history: localStorage.getItem('chatHistory') !== 'false',
+                typing: localStorage.getItem('chatTyping') === 'true'
+            };
+            
+            applySettings(initialSettings);
+        });

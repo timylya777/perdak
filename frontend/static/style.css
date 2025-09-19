@@ -375,3 +375,231 @@ body.dark-theme .typing-dot {
         font-size: 0.9rem;
     }
 }
+/* Стили для модального окна */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .settings-modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .settings-modal {
+            transform: translateY(0);
+        }
+        
+        .dark-theme .settings-modal {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dark-theme .modal-header {
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #718096;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #4a5568;
+        }
+        
+        .dark-theme .close-btn {
+            color: #a0aec0;
+        }
+        
+        .dark-theme .close-btn:hover {
+            color: #e2e8f0;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .setting-group {
+            margin-bottom: 20px;
+        }
+        
+        .setting-group h3 {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .dark-theme .setting-group h3 {
+            color: #cbd5e0;
+        }
+        
+        .theme-options {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .theme-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .theme-btn.active {
+            border-color: #6e8efb;
+            background-color: rgba(110, 142, 251, 0.1);
+        }
+        
+        .theme-btn i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .dark-theme .theme-btn {
+            background: #4a5568;
+            border-color: #718096;
+            color: #e2e8f0;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .slider-container span {
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            height: 5px;
+            -webkit-appearance: none;
+            background: #e2e8f0;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .dark-theme input[type="range"] {
+            background: #4a5568;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #6e8efb;
+            cursor: pointer;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #6e8efb;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        .dark-theme .modal-footer {
+            border-top: 1px solid #4a5568;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #6e8efb;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #5a7df9;
+        }
+        
+        .btn-secondary {
+            background: none;
+            border: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .dark-theme .btn-secondary {
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #f7fafc;
+        }
+        
+        .dark-theme .btn-secondary:hover {
+            background: #4a5568;
+        }

@@ -26,7 +26,72 @@
                 </button>
             </div>
         </header>
-
+            <div class="modal-overlay" id="settings-modal">
+        <div class="settings-modal">
+            <div class="modal-header">
+                <h2>Настройки чата</h2>
+                <button class="close-btn" id="close-settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <h3>Тема оформления</h3>
+                    <div class="theme-options">
+                        <button class="theme-btn active" data-theme="light">
+                            <i class="fas fa-sun"></i>
+                            Светлая
+                        </button>
+                        <button class="theme-btn" data-theme="dark">
+                            <i class="fas fa-moon"></i>
+                            Тёмная
+                        </button>
+                        <button class="theme-btn" data-theme="auto">
+                            <i class="fas fa-desktop"></i>
+                            Системная
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>Размер шрифта</h3>
+                    <div class="slider-container">
+                        <i class="fas fa-font"></i>
+                        <input type="range" min="12" max="20" value="16" id="font-size">
+                        <span id="font-size-value">16px</span>
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>Уведомления</h3>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="notifications" checked>
+                        <label for="notifications">Показывать уведомления о новых сообщениях</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="sound-effects" checked>
+                        <label for="sound-effects">Воспроизводить звуковые эффекты</label>
+                    </div>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>Конфиденциальность</h3>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="history-saving" checked>
+                        <label for="history-saving">Сохранять историю чатов</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="typing-indicator">
+                        <label for="typing-indicator">Показывать индикатор набора сообщения</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-secondary" id="reset-settings">Сбросить</button>
+                <button class="modal-btn btn-primary" id="save-settings">Сохранить</button>
+            </div>
+        </div>
+    </div>
         <main class="chat-container">
             <div class="welcome-message" id="welcome-message">
                 <div class="ai-avatar">
