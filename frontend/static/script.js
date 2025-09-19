@@ -167,3 +167,79 @@ class NeuroChat {
 document.addEventListener('DOMContentLoaded', () => {
     new NeuroChat();
 });
+// Функция для переключения темы
+function toggleTheme() {
+    const body = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
+    const icon = themeToggle.querySelector('i');
+    
+    // Переключаем тему
+    if (body.classList.contains('dark-theme')) {
+        // Переключаем на светлую тему
+        body.classList.remove('dark-theme');
+        body.classList.add('light-theme');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+    } else {
+        // Переключаем на темную тему
+        body.classList.remove('light-theme');
+        body.classList.add('dark-theme');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+    }
+}
+// Функция для загрузки сохраненной темы
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const body = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
+    const icon = themeToggle.querySelector('i');
+    
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        body.classList.add('light-theme');
+    }
+}
+
+// Функция для определения системных предпочтений
+function detectSystemTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    return 'light';
+}
+
+// Инициализация темы при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Загружаем сохраненную тему или определяем системную
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = detectSystemTheme();
+    
+    if (!savedTheme) {
+        // Если тема не сохранена, используем системную
+        localStorage.setItem('theme', systemTheme);
+    }
+    
+    loadSavedTheme();
+    
+    // Добавляем обработчик события для кнопки
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+});
+
+// Слушаем изменения системной темы
+if (window.matchMedia) {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+            // Если пользователь не выбирал тему вручную, следуем системным настройкам
+            const newTheme = e.matches ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            loadSavedTheme();
+        }
+    });
+}
